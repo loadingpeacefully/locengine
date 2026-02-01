@@ -1,13 +1,11 @@
 import React from 'react';
-// CHANGE 1: Import HashRouter instead of BrowserRouter
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom'; // Changed to HashRouter
 import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Editor from './pages/Editor';
 
 function App() {
   return (
-    // CHANGE 2: Use HashRouter here
     <HashRouter>
       <Routes>
         <Route path="/" element={<Landing />} />

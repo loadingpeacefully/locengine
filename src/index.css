@@ -1,13 +1,33 @@
+/* 1. IMPORT FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=JetBrains+Mono:wght@100..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  background-color: #050505;
-  color: #e2e8f0;
+  /* 2. CYBERPUNK BASE STYLES (Matches Gemini Code) */
+  background-color: #02040a; 
+  color: #e2e8f0;            
+  
+  /* 3. DEFAULT FONT & SMOOTHING (The "Crisp" Look) */
+  font-family: 'JetBrains Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+/* 4. CUSTOM SCROLLBAR (Cyan Glow) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #02040a; 
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b; 
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee; 
+}

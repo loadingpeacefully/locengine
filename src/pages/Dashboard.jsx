@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StorageService } from '../services/storage';
-// IMPORT THE NEW SAMPLES
+// IMPORT SAMPLES
 import { JUNGLE_MODULE } from '../data/module_jungle';
 import { RIVER_MODULE } from '../data/module_river';
-import { Plus, Box, Clock, Globe, ExternalLink, LayoutDashboard, LogOut, Zap, User, Trash2 } from 'lucide-react';
+import { Plus, Box, Clock, Globe, LayoutDashboard, LogOut, Zap, User, Trash2 } from 'lucide-react';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -12,33 +12,29 @@ const Dashboard = () => {
 
   useEffect(() => {
     const stored = StorageService.getAll();
-    
-    // SEEDING LOGIC: If DB is empty, load our 2 sample modules
     if (!stored || stored.length === 0) {
        const seeds = [
          {
            id: 'jungle-01',
-           title: "THE JUNGLE MYSTERY",
+           title: "DECIMAL OPERATIONS",
            status: "DEPLOYED",
-           date: new Date().toLocaleDateString(),
-           localeCount: 2,
+           date: "2026-02-01",
+           localeCount: 3,
            slides: JUNGLE_MODULE,
            localeData: { "Global": {}, "India": {} },
            createdAt: Date.now()
          },
          {
            id: 'river-02',
-           title: "CYBER RIVER CROSSING",
-           status: "REVIEW",
-           date: new Date().toLocaleDateString(),
-           localeCount: 2,
+           title: "MONEY WORD PROBLEMS",
+           status: "DRAFT",
+           date: "2026-01-28",
+           localeCount: 5,
            slides: RIVER_MODULE,
            localeData: { "Global": {}, "India": {} },
            createdAt: Date.now()
          }
        ];
-       
-       // Save to storage so they persist
        seeds.forEach(p => StorageService.save(p));
        setProjects(seeds);
     } else {
@@ -50,8 +46,8 @@ const Dashboard = () => {
     const newId = crypto.randomUUID();
     const newProject = {
       id: newId,
-      title: "UNTITLED_MODULE",
-      slides: JUNGLE_MODULE, // Default template
+      title: "NEW_MATH_MODULE",
+      slides: JUNGLE_MODULE, 
       localeData: { "Global": {}, "India": {} },
       createdAt: Date.now(),
       status: "DRAFT"
@@ -68,96 +64,95 @@ const Dashboard = () => {
     }
   };
 
-  const getStatusColor = (status) => {
-    switch(status) {
-      case 'DEPLOYED': return 'text-emerald-400 bg-emerald-900/20 border-emerald-900/50';
-      case 'DRAFT': return 'text-amber-400 bg-amber-900/20 border-amber-900/50';
-      case 'REVIEW': return 'text-cyan-400 bg-cyan-900/20 border-cyan-900/50';
-      default: return 'text-slate-400';
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#02040a] font-mono text-slate-200 selection:bg-cyan-500/30">
+    <div className="h-screen bg-[#02040a] font-mono text-cyan-500 overflow-y-auto custom-scrollbar">
       
-      {/* HEADER */}
-      <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-[#02040a]/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <Zap className="text-fuchsia-500 fill-current w-6 h-6" />
-          <h1 className="text-xl font-black tracking-tighter text-white">LOCENGINE <span className="text-white/20 font-light">V5.0</span></h1>
+      {/* 1. HEADER (Matches Gemini Style) */}
+      <header className="h-16 shrink-0 border-b border-white/5 px-8 flex items-center justify-between bg-black/80 backdrop-blur-xl sticky top-0 z-50">
+        <div className="flex items-center gap-4 cursor-pointer">
+          <Zap size={24} fill="currentColor" className="text-fuchsia-500" />
+          <h1 className="text-xl font-black uppercase tracking-tighter text-white">LocEngine <span className="text-white/20">v5.0</span></h1>
         </div>
-        
-        <div className="flex items-center gap-6">
-          <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-cyan-400">
-            <LayoutDashboard size={14} /> Dashboard
+
+        <nav className="flex gap-8">
+          <button className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2 text-cyan-400">
+            <LayoutDashboard size={14}/> Dashboard
           </button>
-          <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-colors">
-            <LogOut size={14} /> Workspace
+          <button className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2 text-white/40 hover:text-white transition-colors">
+            <LogOut size={14}/> Workspace
           </button>
-          <div className="w-8 h-8 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/40">
-            <User size={16} />
+        </nav>
+
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center">
+            <User size={18} className="text-white/40" />
           </div>
         </div>
       </header>
 
-      {/* CONTENT */}
-      <main className="max-w-7xl mx-auto px-8 py-16">
-        <div className="flex items-end justify-between mb-16">
-          <div>
-            <h1 className="text-5xl font-black text-white tracking-tight mb-2">PROJECT_ARCHIVES</h1>
-            <p className="text-slate-500 italic text-sm">Welcome back. {projects.length} global nodes online.</p>
+      {/* 2. CONTENT AREA */}
+      <div className="max-w-6xl mx-auto space-y-12 py-16 px-8">
+        
+        {/* Title Section */}
+        <div className="flex items-end justify-between border-b border-white/5 pb-8">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-black text-white uppercase tracking-tighter">PROJECT_ARCHIVES</h1>
+            <p className="text-sm text-white/30 font-mono italic">Welcome back, Suneet. Your global nodes are currently synced.</p>
           </div>
-          
           <button 
-            onClick={createNew}
-            className="group relative bg-cyan-400 text-black px-8 py-3 font-black uppercase text-xs tracking-widest hover:bg-cyan-300 transition-all skew-x-[-12deg]"
+            onClick={createNew} 
+            className="bg-cyan-500 text-black px-6 py-3 font-black uppercase text-xs skew-x-[-15deg] flex items-center gap-2 hover:bg-cyan-400 transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)]"
           >
-            <span className="flex items-center gap-2 skew-x-[12deg]">
-              <Plus size={16} strokeWidth={3} /> Create New Node
-            </span>
+            <Plus size={16} /> Create New Node
           </button>
         </div>
 
-        {/* PROJECT GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((proj) => (
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {projects.map(proj => (
             <div 
               key={proj.id} 
               onClick={() => navigate(`/editor/${proj.id}`)}
-              className="bg-[#0b0c15] border border-white/5 hover:border-cyan-500/50 transition-all duration-300 group flex flex-col h-64 relative overflow-hidden cursor-pointer"
+              className="bg-[#0a0b1e]/90 backdrop-blur-xl border border-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.05)] group hover:border-cyan-500/50 transition-all cursor-pointer relative overflow-hidden"
             >
-              <div className="p-6 flex justify-between items-start">
-                <div className="w-10 h-10 bg-cyan-500/10 rounded border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-black transition-colors duration-300">
-                  <Box size={20} />
+              <div className="p-6 space-y-4">
+                <div className="flex justify-between items-start">
+                  <div className="w-10 h-10 bg-cyan-500/10 flex items-center justify-center rounded-lg">
+                    <Box className="text-cyan-400" size={20} />
+                  </div>
+                  <span className={`text-[10px] font-black uppercase px-2 py-0.5 ${
+                    proj.status === 'DEPLOYED' ? 'bg-green-500/10 text-green-500' : 
+                    proj.status === 'DRAFT' ? 'bg-amber-500/10 text-amber-500' : 
+                    'bg-cyan-500/10 text-cyan-500'
+                  }`}>
+                    {proj.status}
+                  </span>
                 </div>
-                <span className={`px-2 py-1 rounded text-[9px] font-black uppercase border ${getStatusColor(proj.status)}`}>
-                  {proj.status}
-                </span>
-              </div>
-
-              <div className="px-6 flex-1">
-                <h3 className="text-xl font-bold text-white mb-3 tracking-tight truncate">{proj.title}</h3>
-                <div className="flex items-center gap-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                  <span className="flex items-center gap-1.5"><Clock size={12} /> {proj.date || new Date().toLocaleDateString()}</span>
-                  <span className="flex items-center gap-1.5"><Globe size={12} /> {proj.localeCount || 2} Locales</span>
+                
+                <div>
+                  <h3 className="text-lg font-bold text-white uppercase group-hover:text-cyan-400 transition-colors">{proj.title}</h3>
+                  <div className="flex items-center gap-4 mt-2">
+                    <span className="text-[10px] text-white/30 flex items-center gap-1 font-mono"><Clock size={10}/> {proj.date || new Date(proj.createdAt).toLocaleDateString()}</span>
+                    <span className="text-[10px] text-white/30 flex items-center gap-1 font-mono"><Globe size={10}/> {proj.localeCount || 2} Locales</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="bg-[#0f111a] border-t border-white/5 p-4 flex gap-3 mt-auto relative z-10">
-                <button className="flex-1 bg-white/5 hover:bg-white/10 text-slate-300 text-[10px] font-black uppercase tracking-widest py-3 rounded-sm transition-colors border border-white/5 hover:border-white/20">
-                  Edit
-                </button>
-                <button 
-                  onClick={(e) => handleDelete(e, proj.id)}
-                  className="w-10 flex items-center justify-center bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-black border border-red-500/20 hover:border-red-500 rounded-sm transition-all duration-300"
-                >
-                  <Trash2 size={14} />
-                </button>
+                <div className="pt-4 border-t border-white/5 flex gap-2">
+                  <button className="flex-grow p-2 text-[10px] font-black uppercase bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all">
+                    Edit
+                  </button>
+                  <button 
+                    onClick={(e) => handleDelete(e, proj.id)}
+                    className="p-2 text-[10px] font-black uppercase bg-cyan-500/10 text-cyan-400 hover:bg-red-500/20 hover:text-red-500 transition-all"
+                  >
+                    <Trash2 size={14}/>
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
-      </main>
+      </div>
     </div>
   );
 };

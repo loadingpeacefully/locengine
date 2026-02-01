@@ -5,19 +5,20 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   safelist: [
-    { pattern: /(bg|text|border)-(cyan|fuchsia|amber|emerald)-(400|500|600)/ },
-    { pattern: /(bg|text|border)-(cyan|fuchsia|amber|emerald)-(400|500|600)\/(10|20|30|40|50)/ },
+    // Ensure all color combinations for status badges are generated
+    { pattern: /(bg|text|border)-(cyan|fuchsia|amber|emerald|red)-(400|500|600|900)/ },
+    { pattern: /(bg|text|border)-(cyan|fuchsia|amber|emerald|red)-(400|500|600|900)\/(10|20|30|40|50)/ },
   ],
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"JetBrains Mono"', '"Courier New"', 'monospace'], // Ensuring that crisp code look
+        mono: ['"JetBrains Mono"', '"Courier New"', 'monospace'], 
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
         cyber: {
-          bg: '#02040a',       // The deep black background
-          panel: '#0b0c15',    // The card/sidebar background
+          bg: '#02040a',       
+          panel: '#0b0c15',    
           cyan: '#22d3ee',
           pink: '#d946ef',
           dim: '#1e293b'
