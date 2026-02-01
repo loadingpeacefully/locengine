@@ -6,11 +6,11 @@
 @tailwind utilities;
 
 body {
-  /* 2. CYBERPUNK BASE STYLES (Matches Gemini Code) */
-  background-color: #02040a; 
-  color: #e2e8f0;            
+  /* 2. CYBERPUNK BASE STYLES */
+  background-color: #02040a; /* Deep Cyber Black */
+  color: #e2e8f0;            /* Slate-200 Text */
   
-  /* 3. DEFAULT FONT & SMOOTHING (The "Crisp" Look) */
+  /* 3. DEFAULT FONT & SMOOTHING */
   font-family: 'JetBrains Mono', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,4 +30,9 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #22d3ee; 
+}
+
+/* 5. GLOW UTILITIES (Required for Dashboard Buttons) */
+.shadow-neon {
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
 }
