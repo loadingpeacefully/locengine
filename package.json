@@ -1,8 +1,9 @@
 {
-  "name": "neo-curriculum",
+  "name": "lessonsaga",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://loadingpeacefully.github.io/lessonsaga",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
